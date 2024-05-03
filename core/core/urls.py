@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
+from django.views.generic import RedirectView
 from django.contrib import admin  # Importe admin
 from medico import views
 from medico.views import (EspecialidadeListView, EspecialidadeCreateView, EspecialidadeUpdateView,
@@ -24,4 +25,6 @@ from medico.views import (EspecialidadeListView, EspecialidadeCreateView, Especi
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('medico.urls')),
+    path('', RedirectView.as_view(url='especialidades/')),  # Redireciona para a lista de especialidades
+    path('especialidades/', EspecialidadeListView.as_view(), name='especialidade_list'),
 ]
